@@ -7,15 +7,21 @@ const app = express();
 // const PORT = process.env.PORT;
 const PORT = 3001;
 require("./db/conn");
-app.use(cors(
-  {
-    origin: ["https://ass-online-certificate-editor.vercel.app"],
+app.use(
+  cors({
+    origin: [
+      "https://ass-online-certificate-editor.vercel.app",
+      "https://ass-online-certificate-editor-validator-server.vercel.app",
+    ],
     methods: ["POST", "GET"],
-    credentials: true
-  }
-));
+    credentials: true,
+  })
+);
+
 app.use(express.json());
-mongoose.connect('mongodb+srv://haribabu91000:wwnpperHUU2fotQK@cluster0.ykldvtg.mongodb.net/certificateGenerator?retryWrites=true&w=majority')
+mongoose.connect(
+  "mongodb+srv://haribabu91000:wwnpperHUU2fotQK@cluster0.ykldvtg.mongodb.net/certificateGenerator?retryWrites=true&w=majority"
+);
 app.use(require("./router/auth"));
 app.get("/", (req, res) => {
   res.send("hello guys i am from server ");
