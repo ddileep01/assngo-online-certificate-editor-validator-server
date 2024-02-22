@@ -9,7 +9,7 @@ const PORT = 3001;
 require("./db/conn");
 app.use(cors(
   {
-    origin: ["https://ass-online-certificate-editor.vercel.app/"],
+    origin: ["https://ass-online-certificate-editor.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
   }
