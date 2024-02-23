@@ -23,15 +23,15 @@ router.post("/certificates", async (req, res) => {
 });
 
 // Get all certificates
-router.get("/certificates", async (req, res) => {
-  try {
-    const allCertificates = await Certificate.find();
-    res.json(allCertificates);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+// router.get("/certificates", async (req, res) => {
+//   try {
+//     const allCertificates = await Certificate.find();
+//     res.json(allCertificates);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 // Delete a certificate
 router.delete("/certificates/:id", async (req, res) => {
