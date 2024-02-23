@@ -5,16 +5,12 @@ dotenv.config({ path: "./config.env" });
 const cors = require("cors");
 const app = express();
 // const PORT = process.env.PORT;
-const PORT = 3001;
+const PORT = 4200;
 require("./db/conn");
 app.use(
   cors({
-    origin: [
-      "https://ass-online-certificate-editor.vercel.app",
-      "https://ass-online-certificate-editor-validator-server.vercel.app",
-    ],
-    methods: ["POST", "GET"],
-    credentials: true,
+    origin: "*",
+    methods: ["POST", "GET", "FETCH", "HEAD"],
   })
 );
 
