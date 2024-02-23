@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4200;
 const MONGODB_URI = process.env.DATABASE;
 // const PORT = 4200;
 require("./db/conn");
