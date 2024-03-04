@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const certificatesSchema = new mongoose.Schema({
+  certId: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Certificate = require("../schema/certificates");
+const { v4: uuidv4 } = require("uuid"); // Import uuidv4
+
 router.get("/", (req, res) => {
   res.send("hello this is hari from server");
 });
@@ -13,9 +15,18 @@ router.post("/certificates", async (req, res) => {
     return res.status(422).json({ error: "Please fill all the details" });
   }
   try {
-    const certificate = new Certificate({ name, fromDate, toDate, email });
+    const certId = uuidv4(); // Generate unique ID
+    const certificate = new Certificate({
+      certId,
+      name,
+      fromDate,
+      toDate,
+      email,
+    });
     await certificate.save();
-    res.status(201).json({ message: "Certificate created successfully" });
+    res
+      .status(201)
+      .json({ message: "Certificate created successfully", certId });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error" });
