@@ -5,7 +5,7 @@ const Certificate = require("../schema/certificates");
 const { v4: uuidv4 } = require("uuid"); // Import uuidv4
 
 router.get("/", (req, res) => {
-  res.send("hello this is hari from server");
+  res.send("hello this is Akhanda Seva Samsthan NGO from server");
 });
 
 // Create a new certificate
