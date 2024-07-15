@@ -12,6 +12,7 @@ app.use(
   cors({
     origin: "*",
     methods: ["POST", "GET", "FETCH", "HEAD"],
+    allowedHeaders: ["Content-Type"]
   })
 );
 
