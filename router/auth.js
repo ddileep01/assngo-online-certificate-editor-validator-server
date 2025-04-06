@@ -47,16 +47,16 @@ router.get("/certificates", async (req, res) => {
 // Delete a certificate
 router.delete("/certificates/:id", async (req, res) => {
   try {
-    const certificateId = req.params.id;
+    const certId = req.params.id;
 
     // Check if the certificate exists
-    const certificate = await Certificate.findById(certificateId);
+    const certificate = await Certificate.findOne({ certId });
     if (!certificate) {
       return res.status(404).json({ error: "Certificate not found" });
     }
 
     // Delete the certificate
-    await certificate.remove();
+    await Certificate.deleteOne({ certId });
 
     res.status(200).json({ message: "Certificate deleted successfully" });
   } catch (err) {
