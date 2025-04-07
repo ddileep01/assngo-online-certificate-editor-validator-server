@@ -56,7 +56,7 @@ router.delete("/certificates/:id", async (req, res) => {
     }
 
     // Delete the certificate
-    await Certificate.deleteOne({ certId });
+    await Certificate.findOneAndDelete({ certId });
 
     res.status(200).json({ message: "Certificate deleted successfully" });
   } catch (err) {

@@ -11,7 +11,7 @@ require("./db/conn");
 app.use(
   cors({
     origin: "*",
-    methods: ["POST", "GET", "FETCH", "HEAD"],
+    methods: ["POST", "GET", "FETCH", "HEAD", "DELETE"],
     allowedHeaders: ["Content-Type"]
   })
 );
