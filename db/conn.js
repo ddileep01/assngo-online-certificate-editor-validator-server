@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DB = 'mongodb+srv://akhandasevasamsthanass_db_user:jO89CFnqWYwuEV9b@assngo-online-certifica.zywn0ue.mongodb.net/?appName=assngo-online-certificate-editor-validator-server'
+const DB = 'mongodb+srv://akhandasevasamsthanass_db_user:jO89CFnqWYwuEV9b@assngo-online-certifica.zywn0ue.mongodb.net/?appName=assngo-online-certificate-editor-validator-server';
 
 let cached = global.mongoose;
 
@@ -15,18 +15,22 @@ async function connectDB() {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 10000,
-      bufferCommands: false,
-    }).then((mongoose) => {
-      console.log('connection successful');
-      return mongoose;
+      serverSelectionTimeoutMS: 8000,
+      socketTimeoutMS: 8000,
+    }).then((m) => {
+      console.log('MongoDB connected');
+      return m;
+    }).catch((err) => {
+      cached.promise = null; // reset so next call can retry
+      throw err;
     });
   }
 
   cached.conn = await cached.promise;
   return cached.conn;
 }
+
+// Initiate connection at module load to warm up on cold starts
+connectDB().catch(console.error);
 
 module.exports = connectDB;

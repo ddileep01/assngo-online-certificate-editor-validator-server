@@ -7,16 +7,19 @@ const connectDB = require("./db/conn");
 const app = express();
 const PORT = 4200;
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["POST", "GET", "FETCH", "HEAD", "DELETE"],
-    allowedHeaders: ["Content-Type"]
-  })
-);
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "DELETE", "HEAD", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+// Handle CORS preflight requests
+app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
+// Ensure DB is connected before processing any request
 app.use(async (_req, res, next) => {
   try {
     await connectDB();
@@ -29,11 +32,8 @@ app.use(async (_req, res, next) => {
 
 app.use(require("./router/auth"));
 
-app.get("/", (req, res) => {
-  res.send("hello guys i am from server ");
-});
-app.get("/login", (req, res) => {
-  res.send("this is from login page ");
+app.get("/", (_req, res) => {
+  res.send("Akhanda Seva Samsthan NGO server is running...");
 });
 
 app.listen(PORT, () => {
